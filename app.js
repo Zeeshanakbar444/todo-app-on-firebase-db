@@ -24,13 +24,7 @@ var ul = document.getElementById("ul")
 
 let addTodo = document.getElementById("addTodo")
 addTodo.addEventListener("click", addTodoFun)
-// ul.innerHTML += `
-// <li>
-// ${item.value}
-// <button onclick = "delButton(this)">Delete</button>
-// <button onclick = "editButton(this)">Edit</button>
-// </li>
-// `
+
 
 async function addTodoFun() {
     try {
@@ -38,11 +32,12 @@ async function addTodoFun() {
             todo: item.value
         }
         const docRef = await addDoc(collection(db, "todos"), itemObj);
+        alert("your data save in data base")
     } catch (error) {
         console.log("ERROR", error.message)
     }
-
-
+    item.value = " "
+    window.location.reload()
 }
 
 window.addEventListener("load", async () => {
@@ -50,9 +45,10 @@ window.addEventListener("load", async () => {
     try {
         let ul = document.getElementById("ul")
         const querySnapshot = await getDocs(collection(db, "todos"));
+        alert("wait for load a data")
         querySnapshot.forEach((doc) => {
             let data = doc.data();
-        
+
             ul.innerHTML += `<li>
 ${data.todo}
 
