@@ -1,0 +1,76 @@
+.h3 {
+    color: red;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    text-transform: capitalize;
+
+}
+body{
+background-color: rgb(177, 228, 228);
+}
+li {
+    color: black;
+}
+.cosntainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cosntainer input{
+    font-size: 25px;
+    background-color: rgb(237, 158, 158);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px;
+        }
+.cosntainer button{
+    margin-left: 10PX;
+    font-size: 25px;
+    background-color: rgb(177, 234, 167);
+    color: rgb(4, 4, 236);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 10px;
+}
+.ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 40px;
+    background-color: white;
+    
+}
+.ul li{
+    border-bottom: 2px solid rgb(223, 16, 16);
+    width: 70%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top: 20px;
+   padding: 5px;
+   font-size: 20px;
+   font-family: 'Courier New', Courier, monospace;
+   font-weight: bold;
+   word-spacing: 5px;
+   letter-spacing: 5px;
+   text-transform: capitalize;
+   color: purple;
+    
+}
+.h1{
+    text-align: center;
+    text-transform: capitalize;
+    word-spacing: 5px;
+    letter-spacing: 3px;
+}
+.btn1{
+    margin-left:70px ;
+    color: antiquewhite;
+    background-color: blueviolet;
+    padding: 10px;
+}
+.btn2{
+    margin-left:10px ;
+    color: antiquewhite;
+    background-color: rgb(76, 6, 227);
+    padding: 10px;
+}
