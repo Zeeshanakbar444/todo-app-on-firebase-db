@@ -2,7 +2,7 @@
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDIAlBM1E0MD-b83-ufwGu2XSPZMphN2nE",
@@ -49,11 +49,11 @@ window.addEventListener("load", async () => {
         querySnapshot.forEach((doc) => {
             let data = doc.data();
 
-            ul.innerHTML += `<li>
+            ul.innerHTML += `<li id="${doc.id}">
 ${data.todo}
 
-<button class="btn1" onclick = "delButton(this)">Delete</button>
-<button class="btn2"  onclick = "editButton(this)">Edit</button>
+<button  class="btn1" onclick = "delButton()">Delete</button>
+<button  class="btn2"  onclick = "editButton()">Edit</button>
 </li>`
 
         });
@@ -63,25 +63,43 @@ ${data.todo}
 
 })
 
-function delButton(ele) {
-    // ele.parentNode.remove()
+window.delButton = async function delButton(ele) {
+    try {
+
+        let li = event.target.parentNode
+        event.target.parentNode.remove()
+        const deleteItem = await deleteDoc(doc(db, "todos", li.id));
+    }
+    catch (error) {
+        console.log("error", error.message)
+        alert(error.message)
+    }
 
 }
-var edit = false;
-function editButton(e) {
-    // var oldVal = e.parentNode.firstChild.nodeValue;
-    // var updateVal = prompt("enter your value", oldVal)
-    // e.parentNode.firstChild.nodeValue = updateVal
-    // console.log(e.parentNode.firstChild.nodeValue)
+
+window.editButton = async function editButton(ele) {
+
+    try {
+
+        console.log("li", event.target.parentNode.firstChild.nodeValue)
+        let li = event.target.parentNode
+        let oldVal = li.firstChild.nodeValue
+        let editValue = prompt("Edit Todo", oldVal)
 
 
-
-
-
+        const updateData = await updateDoc(doc(db, "todos", li.id), {
+            todo: editValue
+        });
+        li.firstChild.nodeValue = editValue
+    } catch (error) {
+        console.log(error.message, 'error')
+        alert(error.message)
+    }
+    window.location.reload();
 }
 
 function deleteAll() {
-    // ul.innerHTML = ''
+
 }
 
 
