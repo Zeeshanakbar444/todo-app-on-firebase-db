@@ -39,7 +39,7 @@ async function addTodoFun() {
     item.value = " "
     window.location.reload()
 }
-
+let arr = [];
 window.addEventListener("load", async () => {
 
     try {
@@ -47,6 +47,7 @@ window.addEventListener("load", async () => {
         const querySnapshot = await getDocs(collection(db, "todos"));
         alert("wait for load a data")
         querySnapshot.forEach((doc) => {
+            arr.push(doc.id)
             let data = doc.data();
 
             ul.innerHTML += `<li id="${doc.id}">
@@ -81,7 +82,6 @@ window.editButton = async function editButton(ele) {
 
     try {
 
-        console.log("li", event.target.parentNode.firstChild.nodeValue)
         let li = event.target.parentNode
         let oldVal = li.firstChild.nodeValue
         let editValue = prompt("Edit Todo", oldVal)
@@ -98,7 +98,23 @@ window.editButton = async function editButton(ele) {
     window.location.reload();
 }
 
-function deleteAll() {
+
+let deleteAllTodo = document.getElementById("deleteAllTodo");
+deleteAllTodo.addEventListener("click", deleteAll)
+async function deleteAll() {
+
+    try {
+
+        ul.innerHTML = " "
+       
+        for (let item of arr) {
+            const deleteItem = await deleteDoc(doc(db, "todos", item));
+        }
+    }
+    catch (error) {
+        console.log("error", error.message)
+        alert(error.message)
+    }
 
 }
 
